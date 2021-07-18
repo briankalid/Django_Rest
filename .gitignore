@@ -130,4 +130,4 @@ dmypy.json
 
 
 #noupdate
-data_to_db
+data_to_db.py
