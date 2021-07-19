@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 # def validate_final_charge()
 # Create your models here.
 class transaction(models.Model):
-    id =  models.CharField(max_length=33,primary_key=True, default=uuid.uuid4, editable=False,unique=True)
+    id =  models.CharField(max_length=100,primary_key=True, default=uuid.uuid4, editable=False,unique=True)
     id_company = models.ForeignKey(company,on_delete=models.CASCADE)
     price = models.FloatField()
     date_transaction = models.DateTimeField()
