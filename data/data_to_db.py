@@ -1,11 +1,11 @@
 # from Plerk.settings import settings
 import pandas as pd
 from datetime import datetime
-# import Company
-# from Company.models import company
 import sqlite3
 from sqlite3 import Error
 import uuid
+import dj_database_url
+# from sqlalchemy import create_engine
 
 def sql_connection():
 
@@ -29,11 +29,11 @@ def clean(df):
     df['company'] = df['company'].apply(lambda x: x.capitalize())
     df['date'] =df['date'].apply(lambda x : str(x[0:22]))
 
-    df[df['company'] == 'Hbomax'] = 'Hbo max'
-    df[df['company'] == 'Izzy internet'] = 'Izzi internet'
-    df[df['company'] == 'Paramount pluss'] = 'Paramount+'
-    df[df['company'] == 'Pedidos ya'] = 'Pedidosya'
-    df[df['company'] == 'New york times'] = 'The new york times'
+    df.loc[df.company=='Hbomax','company']='Hbo max'
+    df.loc[df.company=='Izzy internet','company']='Izzi internet'
+    df.loc[df.company=='Paramount pluss','company']='Paramount+'
+    df.loc[df.company=='Pedidos ya','company']='Pedidosya'
+    df.loc[df.company=='New york times','company']='The new york times'
 
     return df
 
@@ -44,11 +44,11 @@ def companies_to_db(df, con):
     companies['id']=None
     companies['id'] = companies['id'].apply(lambda x: str(uuid.uuid4()))
 
-    try:
-        companies.to_sql('Company_company',con=con, if_exists='append',index=False)
+    # try:
+    companies.to_sql('Company_company',con=con, if_exists='append',index=False)
 
-    except Error:
-        print(Error)
+    # except Error:
+    #     print(Error)
 
     return companies
 
@@ -59,11 +59,11 @@ def transactions_to_db(df,companies,con):
     transactions['id']=None
     transactions['id'] = transactions['id'].apply(lambda x: str(uuid.uuid4()))
 
-    try:
-        transactions.to_sql('Transaction_transaction',con=con, if_exists='append',index=False)
+    # try:
+    transactions.to_sql('Transaction_transaction',con=con, if_exists='append',index=False)
 
-    except Error:
-        print(Error)
+    # except Error:
+    #     print(Error)
 
 if __name__ == '__main__':
     # pars_date = lambda x: str(x[0:22])
@@ -77,7 +77,9 @@ if __name__ == '__main__':
 
     companies=companies_to_db(db,con)
 
+    # postgreSQLConnection = con.connect();
+
     transactions_to_db(db,companies,con)
 
 
-    con.close()
+    # con.close()
