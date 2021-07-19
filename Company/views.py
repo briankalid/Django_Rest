@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 import pandas as pd
 
-from Company import models, serializers
+# from Company import models, serializers
 from Transaction.models import transaction
 from django.core import serializers as parser
 from rest_framework.views import APIView
