@@ -5,8 +5,8 @@ from rest_framework.routers import DefaultRouter
 
 from Company import views
 
-from rest_framework.routers import DefaultRouter
-router = DefaultRouter()
+# from rest_framework.routers import DefaultRouter
+# router = DefaultRouter()
 # router.register('', views.Resume)
 
 urlpatterns = [
